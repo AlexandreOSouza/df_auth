@@ -1,13 +1,17 @@
 import { LOCAL_STORAGE_KEY } from "@/helpers/consts";
+import { setCookie } from "nookies";
 
 export default function useLocalStorage() {
   function saveToken(token: string): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, token);
+    setCookie(null, LOCAL_STORAGE_KEY, token, {
+      maxAge: 30 * 24 * 60 * 60,
+    });
   }
 
   function getToken(): string | undefined {
     const token = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return token ? JSON.parse(token) : undefined;
+    return token ? token : undefined;
   }
 
   function removeToken(): void {
