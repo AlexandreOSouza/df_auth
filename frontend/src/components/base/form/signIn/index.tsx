@@ -2,26 +2,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useForm } from "react-hook-form";
 import schema from "./schema";
-import { Stack, Text } from "@chakra-ui/layout";
+import { Stack } from "@chakra-ui/layout";
 import InputText from "../../input/InputText";
 import { Button } from "@chakra-ui/button";
-import { LoginFormValues, LoginProps } from "./types";
+import { SignFormValues, SignInProps } from "./types";
 import ErrorText from "../../text/Error";
 
-export default function LoginForm({
-  onSubmit,
-  error,
-  onSignIn,
-}: LoginProps & { onSignIn: () => void }) {
+export default function SignInForm({ onSubmit, error }: SignInProps) {
   const {
     handleSubmit,
     control,
     formState: { isSubmitting },
-  } = useForm<LoginFormValues>({
+  } = useForm<SignFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
       email: "",
       password: "",
+      name: "",
     },
   });
 
@@ -33,6 +30,12 @@ export default function LoginForm({
           label={"Email"}
           control={control}
           name={"email"}
+        />
+        <InputText
+          type={"text"}
+          label={"Name"}
+          control={control}
+          name={"name"}
         />
         <InputText
           type={"password"}
@@ -54,9 +57,6 @@ export default function LoginForm({
         >
           Submit
         </Button>
-        <Text onClick={onSignIn} cursor={"pointer"}>
-          Sign in
-        </Text>
       </Stack>
     </form>
   );

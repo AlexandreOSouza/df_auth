@@ -3,7 +3,6 @@ import { setCookie } from "nookies";
 
 export default function useLocalStorage() {
   function saveToken(token: string): void {
-    localStorage.setItem(LOCAL_STORAGE_KEY, token);
     setCookie(null, LOCAL_STORAGE_KEY, token, {
       maxAge: 30 * 24 * 60 * 60,
     });

@@ -9,10 +9,15 @@ export class UsersService {
     @InjectModel('user') private readonly userModel: Model<UserDocument>,
   ) {}
 
-  async createUser(username: string, password: string): Promise<User> {
+  async createUser(
+    username: string,
+    password: string,
+    name: string,
+  ): Promise<User> {
     return this.userModel.create({
       username,
       password,
+      name,
     });
   }
 
