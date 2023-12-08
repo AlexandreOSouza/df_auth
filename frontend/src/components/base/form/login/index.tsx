@@ -1,27 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { SubmitHandler, useForm, UseFormSetError } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import schema from "./schema";
 import { Stack } from "@chakra-ui/layout";
 import InputText from "../../input/InputText";
 import { Button } from "@chakra-ui/button";
+import { LoginFormValues, LoginProps } from "./types";
 
-export type FormValues = {
-  email: string;
-  password: string;
-};
-
-type Props = {
-  onSubmit: SubmitHandler<FormValues>;
-};
-
-export default function LoginForm({ onSubmit }: Props) {
+export default function LoginForm({ onSubmit }: LoginProps) {
   const {
     handleSubmit,
     control,
     formState: { isSubmitting },
     setError,
-  } = useForm<FormValues>({
+  } = useForm<LoginFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
       email: "",
