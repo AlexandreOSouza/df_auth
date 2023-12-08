@@ -4,7 +4,7 @@ import { useLogin } from "@/hook/useLogin";
 import { Card, CardBody, CardHeader } from "@chakra-ui/card";
 
 export default function Login() {
-  const { onSubmit } = useLogin();
+  const { onSubmit, error } = useLogin();
   return (
     <Card p={2}>
       <CardHeader>
@@ -12,7 +12,7 @@ export default function Login() {
       </CardHeader>
       <hr />
       <CardBody>
-        <LoginForm onSubmit={onSubmit} />
+        <LoginForm onSubmit={onSubmit} error={error} />
       </CardBody>
     </Card>
   );

@@ -7,4 +7,5 @@ export type LoginFormValues = {
 
 export type LoginProps = {
   onSubmit: SubmitHandler<LoginFormValues>;
+  error: string;
 };

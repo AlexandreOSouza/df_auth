@@ -8,7 +8,10 @@ export default async function loginApi({ email, password }: LoginFormValues) {
     },
     body: JSON.stringify({ username: email, password }),
   });
-  if (!response.ok) console.log("errrorrrr");
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err["message"]);
+  }
 
   return await response.json();
 }

@@ -2,17 +2,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useForm } from "react-hook-form";
 import schema from "./schema";
-import { Stack } from "@chakra-ui/layout";
+import { Stack, Text } from "@chakra-ui/layout";
 import InputText from "../../input/InputText";
 import { Button } from "@chakra-ui/button";
 import { LoginFormValues, LoginProps } from "./types";
+import ErrorText from "../../text/Error";
 
-export default function LoginForm({ onSubmit }: LoginProps) {
+export default function LoginForm({ onSubmit, error }: LoginProps) {
   const {
     handleSubmit,
     control,
     formState: { isSubmitting },
-    setError,
   } = useForm<LoginFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -20,6 +20,7 @@ export default function LoginForm({ onSubmit }: LoginProps) {
       password: "",
     },
   });
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Stack spacing={2}>
@@ -35,6 +36,9 @@ export default function LoginForm({ onSubmit }: LoginProps) {
           control={control}
           name={"password"}
         />
+      </Stack>
+      <Stack>
+        <ErrorText>{error}</ErrorText>
       </Stack>
       <Stack align={"center"}>
         <Button
